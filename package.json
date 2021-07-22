@@ -1,0 +1,22 @@
+{
+    "name": "com.unity.vsp-analytics",
+    "version": "0.1.0",
+    "displayName": "VSP Analytics",
+    "description": "An extension of Unity Editor Analytics used for Verified Solutions Partners.",
+    "unity": "2018.4",
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "noEngineReferences": false,
+    "versionDefines": [
+      {
+        "name": "Unity",
+        "expression": "2018.4",
+        "define": "USING_VSP_ANALYTICS"
+      }
+    ]
+  }
