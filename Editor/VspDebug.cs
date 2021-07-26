@@ -5,8 +5,9 @@ namespace UnityEditor.VspAnalytics
 {
     internal static class VspDebug
     {
+#if VSP_ANALYTICS_DEBUG
         private static readonly string k_VspPrefix = "[VSP Analytics] ";
-
+#endif
         public static void Log(string message)
         {
 #if VSP_ANALYTICS_DEBUG
