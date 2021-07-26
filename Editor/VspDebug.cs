@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace UnityEditor.VSP
+namespace UnityEditor.VspAnalytics
 {
     internal static class VspDebug
     {
