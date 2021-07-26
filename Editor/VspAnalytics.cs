@@ -16,8 +16,6 @@ namespace UnityEditor.VspAnalytics
 				EditorAnalytics.RegisterEventWithLimit(eventName, k_MaxEventsPerHour, k_MaxNumberOfElements, k_VendorKey);
 
 			bool isResultOk = result == AnalyticsResult.Ok;
-			VspDebug.Log($"RegisterEvent's AnalyticsResult is {result}");
-
 			return isResultOk;
 		}
 
