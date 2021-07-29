@@ -1,4 +1,5 @@
-﻿using UnityEngine.Analytics;
+﻿using System;
+using UnityEngine.Analytics;
 
 namespace UnityEditor.VspAnalytics
 {
@@ -15,10 +16,8 @@ namespace UnityEditor.VspAnalytics
 			AnalyticsResult result =
 				EditorAnalytics.RegisterEventWithLimit(k_EventName, k_MaxEventsPerHour, k_MaxNumberOfElements, k_VendorKey);
 
-			if (result == AnalyticsResult.Ok)
-				return true;
-
-			return false;
+			bool isResultOk = result == AnalyticsResult.Ok;
+			return isResultOk;
 		}
 
 		[System.Serializable]
@@ -38,29 +37,46 @@ namespace UnityEditor.VspAnalytics
 		/// <param name="customerUid">Unique identifier of the customer using Partner's Verified Solution.</param>
 		public static void SendAnalyticsEvent(string eventName, string partnerName, string customerUid)
 		{
-			// Are Editor Analytics enabled ? (Preferences)
-			// The event shouldn't be able to report if this is disabled but if we know we're not going to report
-			// Lets early out and not waste time gathering all the data
-			if (!EditorAnalytics.enabled)
-				return;
-
-			// Can an event be registered?
-			if (!RegisterEvent())
-				return;
-
-			// Create an expected data object
-			var eventData = new VspAnalyticsData
+			try
 			{
-				eventName = eventName,
-				partnerName = partnerName,
-				customerUid = customerUid,
-				extra = "{}"
-			};
+				VspDebug.Log($"SendAnalyticsEvent invoked with parameters: {eventName}, {partnerName}, {customerUid}");
+				
+				// Are Editor Analytics enabled ? (Preferences)
+				// The event shouldn't be able to report if this is disabled but if we know we're not going to report
+				// Lets early out and not waste time gathering all the data
+				bool isEditorAnalyticsEnabled = EditorAnalytics.enabled;
+				VspDebug.Log($"EditorAnalytics.enabled: {isEditorAnalyticsEnabled}");
+				if (!isEditorAnalyticsEnabled)
+					return;
 
-			// Send the Event and get the result
-			AnalyticsResult result = EditorAnalytics.SendEventWithLimit(k_EventName, eventData);
-		
-			// Fail/succeed silently as we are not handling results
+				// Can an event be registered?
+				bool isEventRegistered = RegisterEvent();
+				VspDebug.Log($"RegisterEvent {eventName}: {isEventRegistered}");
+				if (!isEventRegistered)
+					return;
+
+				// Create an expected data object
+				var eventData = new VspAnalyticsData
+				{
+					eventName = eventName,
+					partnerName = partnerName,
+					customerUid = customerUid,
+					extra = "{}"
+				};
+
+				// Send the Event and get the result
+				AnalyticsResult result = EditorAnalytics.SendEventWithLimit(k_EventName, eventData);
+
+				string logMessage = $"SendEventWithLimit returned result: {result}";
+				if (result != AnalyticsResult.Ok)
+					VspDebug.LogWarning(logMessage);
+				else
+					VspDebug.Log(logMessage);
+			}
+			catch (Exception e)
+			{
+				VspDebug.LogError($"Exception has occured in SendAnalytics\n{e}");
+			}
 		}
 	}
 }
