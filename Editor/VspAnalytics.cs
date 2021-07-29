@@ -8,11 +8,12 @@ namespace UnityEditor.VspAnalytics
 		const int k_MaxNumberOfElements = 1000;
 
 		const string k_VendorKey = "unity.vsp-analytics";
+		const string k_EventName = "vspAnalytics";
 
-		static bool RegisterEvent(string eventName)
+		static bool RegisterEvent()
 		{
 			AnalyticsResult result =
-				EditorAnalytics.RegisterEventWithLimit(eventName, k_MaxEventsPerHour, k_MaxNumberOfElements, k_VendorKey);
+				EditorAnalytics.RegisterEventWithLimit(k_EventName, k_MaxEventsPerHour, k_MaxNumberOfElements, k_VendorKey);
 
 			if (result == AnalyticsResult.Ok)
 				return true;
@@ -44,7 +45,7 @@ namespace UnityEditor.VspAnalytics
 				return;
 
 			// Can an event be registered?
-			if (!RegisterEvent(eventName))
+			if (!RegisterEvent())
 				return;
 
 			// Create an expected data object
@@ -57,7 +58,7 @@ namespace UnityEditor.VspAnalytics
 			};
 
 			// Send the Event and get the result
-			AnalyticsResult result = EditorAnalytics.SendEventWithLimit(eventName, eventData);
+			AnalyticsResult result = EditorAnalytics.SendEventWithLimit(k_EventName, eventData);
 		
 			// Fail/succeed silently as we are not handling results
 		}
