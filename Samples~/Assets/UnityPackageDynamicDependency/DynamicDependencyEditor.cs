@@ -85,6 +85,7 @@ public class DynamicDependencyEditor : EditorWindow
         {
 #if VSP_ANALYTICS_ENABLED
             VspAnalytics.SendAnalyticsEvent(actionName, partnerName, customerUid);
+            Debug.Log($"[VSP Analytics] Analytics Event ({actionName}) was sent!");
 #endif // VSP_ANALYTICS_ENABLED
         }
 

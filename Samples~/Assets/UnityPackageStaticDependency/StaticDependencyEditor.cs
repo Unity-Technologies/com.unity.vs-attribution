@@ -68,6 +68,7 @@ public class StaticDependencyEditor : EditorWindow
         if(GUILayout.Button("Export"))
         {
             Export();
+            Debug.Log($"[VSP Analytics] UnityPackage was exported to: ({Path.GetFullPath(Path.Combine(Application.dataPath, "../"))})!");
         }
         
         DrawLine(Color.gray);
@@ -88,6 +89,7 @@ public class StaticDependencyEditor : EditorWindow
         if(GUILayout.Button("Send Analytics Event"))
         {
             VspAnalytics.SendAnalyticsEvent(actionName, partnerName, customerUid);
+            Debug.Log($"[VSP Analytics] Analytics Event ({actionName}) was sent!");
         }
 
         DrawHelpBox("Calls VspAnalytics.SendAnalyticsEvent(string actionName, \n" +
