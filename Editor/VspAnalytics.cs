@@ -23,7 +23,7 @@ namespace UnityEditor.VspAnalytics
 		[System.Serializable]
 		struct VspAnalyticsData
 		{
-			public string eventName;
+			public string actionName;
 			public string partnerName;
 			public string customerUid;
 			public string extra;
@@ -32,14 +32,14 @@ namespace UnityEditor.VspAnalytics
 		/// <summary>
 		/// Registers and attempts to send a VSP Analytics event.
 		/// </summary>
-		/// <param name="eventName">Name of the event, identifying a place this analytics event was called from.</param>
+		/// <param name="actionName">Name of the action, identifying a place this analytics event was called from.</param>
 		/// <param name="partnerName">Identifiable Verified Solutions Partner name.</param>
 		/// <param name="customerUid">Unique identifier of the customer using Partner's Verified Solution.</param>
-		public static void SendAnalyticsEvent(string eventName, string partnerName, string customerUid)
+		public static void SendAnalyticsEvent(string actionName, string partnerName, string customerUid)
 		{
 			try
 			{
-				VspDebug.Log($"SendAnalyticsEvent invoked with parameters: {eventName}, {partnerName}, {customerUid}");
+				VspDebug.Log($"SendAnalyticsEvent invoked with parameters: {actionName}, {partnerName}, {customerUid}");
 				
 				// Are Editor Analytics enabled ? (Preferences)
 				// The event shouldn't be able to report if this is disabled but if we know we're not going to report
@@ -51,14 +51,14 @@ namespace UnityEditor.VspAnalytics
 
 				// Can an event be registered?
 				bool isEventRegistered = RegisterEvent();
-				VspDebug.Log($"RegisterEvent {eventName}: {isEventRegistered}");
+				VspDebug.Log($"RegisterEvent {actionName}: {isEventRegistered}");
 				if (!isEventRegistered)
 					return;
 
 				// Create an expected data object
 				var eventData = new VspAnalyticsData
 				{
-					eventName = eventName,
+					actionName = actionName,
 					partnerName = partnerName,
 					customerUid = customerUid,
 					extra = "{}"

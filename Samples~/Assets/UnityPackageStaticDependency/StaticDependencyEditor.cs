@@ -11,7 +11,7 @@ public class StaticDependencyEditor : EditorWindow
     
     static List<string> s_AssetPaths = new List<string> {"Assets"};
     
-    public string eventName;
+    public string actionName;
     public string partnerName;
     public string customerUid;
 
@@ -79,7 +79,7 @@ public class StaticDependencyEditor : EditorWindow
 
         GUILayout.Label("VSP Analytics API", EditorStyles.boldLabel);
         
-        eventName = EditorGUILayout.TextField("Event Name", eventName);
+        actionName = EditorGUILayout.TextField("Action Name", actionName);
         partnerName = EditorGUILayout.TextField("VSP Partner Name", partnerName);
         customerUid = EditorGUILayout.TextField("VSP Customer UID", customerUid);
 
@@ -87,10 +87,10 @@ public class StaticDependencyEditor : EditorWindow
 
         if(GUILayout.Button("Send Analytics Event"))
         {
-            VspAnalytics.SendAnalyticsEvent(eventName, partnerName, customerUid);
+            VspAnalytics.SendAnalyticsEvent(actionName, partnerName, customerUid);
         }
 
-        DrawHelpBox("Calls VspAnalytics.SendAnalyticsEvent(string eventName, \n" +
+        DrawHelpBox("Calls VspAnalytics.SendAnalyticsEvent(string actionName, \n" +
                     "string partnerName, string customerUid)\n\n" +
                     "Include this call in your Login / Initialization code.", 4);
         
