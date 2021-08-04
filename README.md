@@ -5,7 +5,7 @@ VSP Analytics package is an extension of Unity Editor Analytics used by Verified
 Public slack channel: [#vsp-revenue-attribution](https://unity.slack.com/messages/C01S4J7VB16/)
 
 ### Current Status
-This project is under development.
+This project is functional and usable (waiting to be made public).
 
 ### Compatibility
 All versions of Unity from 2018.4 and above are compatible.
