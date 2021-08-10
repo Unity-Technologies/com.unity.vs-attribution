@@ -2,11 +2,13 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+#if VSP_ANALYTICS_ENABLED
 using UnityEditor.VspAnalytics;
+#endif
 
 public class StaticDependencyEditor : EditorWindow
 {
-    static readonly Vector2 s_WindowSize = new Vector2(300, 500);
+    static readonly Vector2 s_WindowSize = new Vector2(300, 620);
     static readonly string s_VspAnalyticsAssetPath = "Packages/com.unity.vsp-analytics";
     
     static List<string> s_AssetPaths = new List<string> {"Assets"};
@@ -28,8 +30,20 @@ public class StaticDependencyEditor : EditorWindow
 
     public void OnGUI()
     {
+        #region VSP_ANALYTICS_ENABLED define
+#if VSP_ANALYTICS_ENABLED
+        bool isUsingVspAnalyticsEnabled = true;
+#else
+        bool isUsingVspAnalyticsEnabled = false;
+#endif// VSP_ANALYTICS_ENABLED
+        #endregion
+        
         #region Data Preparation
+        // Is VSP Analytics package found
         bool vspAnalyticsFound = Directory.Exists(s_VspAnalyticsAssetPath);
+        
+        // Is VSP_ANALYTICS_ENABLED define is enabled
+        string defineText = isUsingVspAnalyticsEnabled ? "Enabled!" : "Disabled!";
 
         if (vspAnalyticsFound)
         {
@@ -53,10 +67,18 @@ public class StaticDependencyEditor : EditorWindow
                     "does not handle package dependencies.\n\n" +
                     "Exported .unitypackage will appear in the project's " +
                     "directory.", 9);
+
+        DrawLine(Color.gray);
         
-        GUILayout.Space(10f);
+        GUILayout.Label("VSP_ANALYTICS_ENABLED status:", EditorStyles.boldLabel);
+        GUILayout.Label($"{defineText}");
+        DrawHelpBox("For this to be Enabled, two conditions need to be fullfilled.\n" +
+                    "1.Assembly Definition - reference to VSP Analytics and a Version Define\n" +
+                    "2.VSP Analytics installed", 4);
         
-        GUILayout.Label("VSP Analytics found:", EditorStyles.boldLabel);
+        DrawLine(Color.gray);
+        
+        GUILayout.Label("VSP Analytics package found:", EditorStyles.boldLabel);
         GUILayout.Label(vspAnalyticsFound.ToString());
         
         GUILayout.Space(10f);
@@ -88,8 +110,12 @@ public class StaticDependencyEditor : EditorWindow
 
         if(GUILayout.Button("Send Analytics Event"))
         {
+#if VSP_ANALYTICS_ENABLED
             VspAnalytics.SendAnalyticsEvent(actionName, partnerName, customerUid);
             Debug.Log($"[VSP Analytics] Analytics Event ({actionName}) was sent!");
+#else 
+            Debug.Log($"[VSP Analytics] Analytics Event ({actionName}) was not sent! VSP_ANALYTICS_ENABLED was not found.");
+#endif // VSP_ANALYTICS_ENABLED
         }
 
         DrawHelpBox("Calls VspAnalytics.SendAnalyticsEvent(string actionName, \n" +
