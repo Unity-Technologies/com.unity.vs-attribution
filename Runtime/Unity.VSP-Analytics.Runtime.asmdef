@@ -1,9 +1,7 @@
 {
-    "name": "Unity.VSP-Analytics.Editor",
+    "name": "Unity.VSP-Analytics.Runtime",
     "references": [],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

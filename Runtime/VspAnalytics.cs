@@ -1,10 +1,12 @@
 ﻿using System;
+using UnityEditor;
 using UnityEngine.Analytics;
 
-namespace UnityEditor.VspAnalytics
+namespace UnityEngine.VspAnalytics
 {
 	public static class VspAnalytics
 	{
+#if UNITY_EDITOR
 		const int k_MaxEventsPerHour = 1000;
 		const int k_MaxNumberOfElements = 1000;
 
@@ -20,7 +22,7 @@ namespace UnityEditor.VspAnalytics
 			return isResultOk;
 		}
 
-		[System.Serializable]
+		[Serializable]
 		struct VspAnalyticsData
 		{
 			public string actionName;
@@ -28,6 +30,7 @@ namespace UnityEditor.VspAnalytics
 			public string customerUid;
 			public string extra;
 		}
+#endif // UNITY_EDITOR
 
 		/// <summary>
 		/// Registers and attempts to send a VSP Analytics event.
@@ -37,6 +40,7 @@ namespace UnityEditor.VspAnalytics
 		/// <param name="customerUid">Unique identifier of the customer using Partner's Verified Solution.</param>
 		public static void SendAnalyticsEvent(string actionName, string partnerName, string customerUid)
 		{
+#if UNITY_EDITOR
 			try
 			{
 				VspDebug.Log($"SendAnalyticsEvent invoked with parameters: {actionName}, {partnerName}, {customerUid}");
@@ -77,6 +81,7 @@ namespace UnityEditor.VspAnalytics
 			{
 				VspDebug.LogError($"Exception has occured in SendAnalytics\n{e}");
 			}
+#endif // UNITY_EDITOR
 		}
 	}
 }
