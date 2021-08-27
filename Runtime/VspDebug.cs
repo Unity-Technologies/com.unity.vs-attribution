@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace UnityEditor.VspAnalytics
+namespace UnityEngine.VspAnalytics
 {
     internal static class VspDebug
     {
@@ -12,7 +12,7 @@ namespace UnityEditor.VspAnalytics
         {
 #if VSP_ANALYTICS_DEBUG
             string finalMessage = k_VspPrefix + message;
-            Debug.Log(message);
+            Debug.Log(finalMessage);
 #endif
         }
         
@@ -20,7 +20,7 @@ namespace UnityEditor.VspAnalytics
         {
 #if VSP_ANALYTICS_DEBUG
             string finalMessage = k_VspPrefix + message;
-            Debug.LogWarning(message);
+            Debug.LogWarning(finalMessage);
 #endif
         }
         
@@ -28,7 +28,7 @@ namespace UnityEditor.VspAnalytics
         {
 #if VSP_ANALYTICS_DEBUG
             string finalMessage = k_VspPrefix + message;
-            Debug.LogError(message);
+            Debug.LogError(finalMessage);
 #endif
         }
     }
