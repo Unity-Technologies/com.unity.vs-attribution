@@ -10,10 +10,9 @@ using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 public static class DynamicPackageManagerUtility
 {
     private static Request s_CurrentRequest;
-    
     private const string k_VspAnalyticsPackageName = "com.unity.vsp-analytics";
     
-    public static bool vspAnalyticsPackageFound = false;
+    public static bool vspAnalyticsPackageFound;
 
     static DynamicPackageManagerUtility()
     {
@@ -31,12 +30,6 @@ public static class DynamicPackageManagerUtility
         EditorApplication.update += ListRequestProgress;
     }
 
-    public static void UninstallAnalyticsPackage()
-    {
-        s_CurrentRequest = Client.Remove(k_VspAnalyticsPackageName);
-        EditorApplication.update += RemoveRequestProgress;
-    }
-    
     static void ListRequestProgress()
     {
         if (s_CurrentRequest.IsCompleted)
@@ -48,14 +41,6 @@ public static class DynamicPackageManagerUtility
             }
 
             EditorApplication.update -= ListRequestProgress;
-        }
-    }
-
-    static void RemoveRequestProgress()
-    {
-        if (s_CurrentRequest.IsCompleted)
-        {
-            EditorApplication.update -= RemoveRequestProgress;
         }
     }
 }
