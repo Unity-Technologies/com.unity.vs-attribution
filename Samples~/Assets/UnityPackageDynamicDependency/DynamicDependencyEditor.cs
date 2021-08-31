@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 
 #if VSP_ANALYTICS_ENABLED
-using UnityEditor.VspAnalytics;
+using UnityEngine.VspAnalytics;
 #endif
 
 public class DynamicDependencyEditor : EditorWindow
@@ -60,7 +60,8 @@ public class DynamicDependencyEditor : EditorWindow
         GUILayout.Label("VSP_ANALYTICS_ENABLED status:", EditorStyles.boldLabel);
         GUILayout.Label($"{defineText}");
         DrawHelpBox("For this to be Enabled, two conditions need to be fullfilled.\n" +
-                    "1.Assembly Definition - reference to VSP Analytics and a Version Define\n" +
+                    "1.Assembly Definition - reference to VSP Analytics and a\n" +
+                    "Version Define for VSP_ANALYTICS_ENABLED\n" +
                     "2.VSP Analytics installed (VspAnalyticsPackageInstaller)", 4);
         
         DrawLine(Color.gray);
