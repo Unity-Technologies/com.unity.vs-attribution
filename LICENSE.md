@@ -1,4 +1,4 @@
-VSP Analytics copyright © 2021 Unity Technologies ApS
+VSP Analytics copyright © 2021 Unity Technologies
 
 Licensed under the Unity Package Distribution License (see https://unity3d.com/legal/licenses/Unity_Package_Distribution_License).
 
