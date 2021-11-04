@@ -6,6 +6,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.1.0] - TBD
 
-### This is the first release of *VSP Analytics* Unity package.
+### This is the first release of *VSP Attribution* Unity package.
 
 *Description of the release - TBA*
