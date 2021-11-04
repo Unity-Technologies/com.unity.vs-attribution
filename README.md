@@ -6,7 +6,7 @@ VSP Attribution package is an extension of Unity Editor Analytics used by Verifi
 This project is functional and usable.
 
 ### Compatibility
-All versions of Unity from 2018.4 and above are compatible.
+All versions of Unity from 2019.4 and above are compatible.
 
 ### Disclaimer
 Only intended to be used by Unity's Verified Solutions Partners. 
