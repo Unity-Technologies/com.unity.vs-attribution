@@ -15,7 +15,7 @@ public class StaticScriptSample : EditorWindow
     {
         var window = GetWindow<StaticScriptSample>();
         
-        window.titleContent = new GUIContent("Static Script Information!");
+        window.titleContent = new GUIContent("Static Script Information");
         window.minSize = s_WindowSize;
         window.maxSize = s_WindowSize;
     }
@@ -26,11 +26,11 @@ public class StaticScriptSample : EditorWindow
         DrawLine(Color.gray);
         
         DrawHelpBox("<b><size=11>To implement VSP Attribution service:</size></b>\n" +
-                    "1. Import <color=#ff00ffff>VSPAttribution</color> script into your package\n\n" +
+                    "1. Import <b>VSPAttribution</b> script into your package\n\n" +
                     "2. Change the namespace to something else, like:\n" +
-                    "namespace <color=#ff00ffff>UnityEngine.VspAttribution.PartnerName</color> \n\n" +
-                    "3. Add <color=#ff00ffff>SendAttributionEvent</color> call to your login\n\n" +
-                    "or initialization method.", 7);
+                    "namespace <b>UnityEngine.VspAttribution.PartnerName</b> \n\n" +
+                    "3. Add <b>SendAttributionEvent</b> call to your login\n" +
+                    "or initialization method.", 8);
 
         DrawLine(Color.gray);
         

@@ -3,6 +3,7 @@
   "version": "0.6.0",
   "displayName": "VSP Attribution",
   "description": "An extension of Unity Editor Analytics used for Verified Solutions Partners.",
-  "unity": "2018.4",
-  "hideInEditor": true
+  "unity": "2019.4",
+  "hideInEditor": true,
+  "type": "tool"
 }
