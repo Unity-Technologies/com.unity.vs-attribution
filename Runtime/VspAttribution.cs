@@ -14,8 +14,13 @@ namespace UnityEngine.VspAttribution
 
 		static bool RegisterEvent()
 		{
+#if UNITY_EDITOR
 			AnalyticsResult result = EditorAnalytics.RegisterEventWithLimit(k_EventName, k_MaxEventsPerHour,
 				k_MaxNumberOfElements, k_VendorKey);
+#else // IF !UNITY_EDITOR
+			AnalyticsResult result = Analytics.Analytics.RegisterEvent(k_EventName, k_MaxEventsPerHour,
+				k_MaxNumberOfElements, k_VendorKey);
+#endif
 
 			bool isResultOk = result == AnalyticsResult.Ok;
 			return isResultOk;
@@ -40,6 +45,7 @@ namespace UnityEngine.VspAttribution
 		{
 			try
 			{
+#if UNITY_EDITOR
 				// Are Editor Analytics enabled ? (Preferences)
 				// The event shouldn't be able to report if this is disabled but if we know we're not going to report
 				// lets early out and not spend time gathering all the data
@@ -47,6 +53,15 @@ namespace UnityEngine.VspAttribution
 
 				if (!isEditorAnalyticsEnabled)
 					return AnalyticsResult.AnalyticsDisabled;
+#else // IF !UNITY_EDITOR
+				bool isRuntimeAnalyticsEnabled = Analytics.Analytics.enabled;
+				
+				if (!isRuntimeAnalyticsEnabled)
+					return AnalyticsResult.AnalyticsDisabled;
+				
+				if (!Debug.isDebugBuild)
+					return AnalyticsResult.UnsupportedPlatform;
+#endif
 
 				// Can an event be registered?
 				bool isEventRegistered = RegisterEvent();
@@ -63,8 +78,12 @@ namespace UnityEngine.VspAttribution
 					extra = "{}"
 				};
 
+#if UNITY_EDITOR
 				// Send the Attribution Event
 				var eventResult = EditorAnalytics.SendEventWithLimit(k_EventName, eventData);
+#else // IF !UNITY_EDITOR
+				var eventResult = Analytics.Analytics.SendEvent(k_EventName, eventData);
+#endif
 				return eventResult;
 			}
 			catch
