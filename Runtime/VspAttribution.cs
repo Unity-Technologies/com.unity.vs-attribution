@@ -6,7 +6,7 @@ namespace UnityEngine.VspAttribution
 {
 	public static class VspAttribution
 	{
-		const int k_MaxEventsPerHour = 1000;
+		const int k_MaxEventsPerHour = 20;
 		const int k_MaxNumberOfElements = 1000;
 
 		const string k_VendorKey = "unity.vsp-attribution";
