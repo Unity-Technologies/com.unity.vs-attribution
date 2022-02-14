@@ -41,7 +41,7 @@ namespace UnityEngine.VspAttribution
 		/// <param name="actionName">Name of the action, identifying a place this event was called from.</param>
 		/// <param name="partnerName">Identifiable Verified Solutions Partner name.</param>
 		/// <param name="customerUid">Unique identifier of the customer using Partner's Verified Solution.</param>
-		public static AnalyticsResult SendAttributionEvent(string actionName, string partnerName, string customerUid)
+		public static AnalyticsResult SendAttributionEvent(string actionName, string partnerName, string customerUid, bool forceSend = false)
 		{
 			try
 			{
@@ -51,7 +51,7 @@ namespace UnityEngine.VspAttribution
 				// lets early out and not spend time gathering all the data
 				bool isEditorAnalyticsEnabled = EditorAnalytics.enabled;
 
-				if (!isEditorAnalyticsEnabled)
+				if (!isEditorAnalyticsEnabled && forceSend == false)
 					return AnalyticsResult.AnalyticsDisabled;
 #else // IF !UNITY_EDITOR
 				bool isRuntimeAnalyticsEnabled = Analytics.Analytics.enabled;

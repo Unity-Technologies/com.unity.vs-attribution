@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using UnityEditor;
 using UnityEngine.Analytics;
 
 namespace UnityEngine.VspAttribution.Tests
@@ -16,7 +17,7 @@ namespace UnityEngine.VspAttribution.Tests
         [Test]
         public void SendAttributionEvent_Returns_Ok()
         {
-            AnalyticsResult result = VspAttribution.SendAttributionEvent("testAction", "testPartner", "testCustomerUid");
+            AnalyticsResult result = VspAttribution.SendAttributionEvent("testAction", "testPartner", "testCustomerUid", true);
             Assert.AreEqual(AnalyticsResult.Ok, result);
         }
     }
