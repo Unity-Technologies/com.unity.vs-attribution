@@ -32,11 +32,7 @@ publish:
   commands:
     - npm install upm-ci-utils@stable -g --registry https://artifactory.prd.cds.internal.unity3d.com/artifactory/api/npm/upm-npm
 # Please remove the dry-run option once your CI pipeline is in place ant that you're ready to publish for real
-    - upm-ci package publish --package-path package --dry-run
-  triggers:
-    tags:
-      only:
-        - /^[Rr][Cc]-(0\.\d+\.\d+|[1-9]\d*\.\d+\.\d+(-preview(\.\d+)?|-exp(\.\d+|-\w+\.\d+)|-pre\.\d+)?)$/
+    - upm-ci package publish --dry-run
   artifacts:
     artifacts:
       paths:
