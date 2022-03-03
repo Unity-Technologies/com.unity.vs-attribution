@@ -1,0 +1,5 @@
+{
+	"displayName": "Static Dependency Sample",
+	"description": "Try out Static Dependency Sample",
+	"createSeparatePackage": false
+}
