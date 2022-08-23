@@ -1,9 +1,8 @@
 {
-  "name": "com.unity.vsp-attribution",
-  "version": "0.6.0",
-  "displayName": "VSP Attribution",
-  "description": "An extension of Unity Editor Analytics used for Verified Solutions Partners.",
-  "unity": "2019.4",
+  "name": "com.unity.vs-attribution",
+  "version": "1.0.0",
+  "displayName": "VSAttribution",
+  "description": "An extension of Unity Editor Analytics used for Verified Solutions.",
   "hideInEditor": true,
   "type": "tool"
 }

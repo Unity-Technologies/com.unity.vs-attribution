@@ -1,6 +1,6 @@
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.VspAttribution;
+using UnityEditor.VSAttribution;
 
 public class StaticScriptSample : EditorWindow
 {
@@ -10,7 +10,7 @@ public class StaticScriptSample : EditorWindow
     public string partnerName;
     public string customerUid;
 
-    [MenuItem("VSP-Samples/Static Script Information")]
+    [MenuItem("VS-Samples/Static Script Information")]
     public static void Initialize()
     {
         var window = GetWindow<StaticScriptSample>();
@@ -25,31 +25,31 @@ public class StaticScriptSample : EditorWindow
         // Implementation information
         DrawLine(Color.gray);
         
-        DrawHelpBox("<b><size=11>To implement VSP Attribution service:</size></b>\n" +
-                    "1. Import <b>VSPAttribution</b> script into your package\n\n" +
+        DrawHelpBox("<b><size=11>To implement VS Attribution service:</size></b>\n" +
+                    "1. Import <b>VSAttribution</b> script into your package\n\n" +
                     "2. Change the namespace to something else, like:\n" +
-                    "namespace <b>UnityEngine.VspAttribution.PartnerName</b> \n\n" +
+                    "namespace <b>UnityEngine.VSAttribution.PartnerName</b> \n\n" +
                     "3. Add <b>SendAttributionEvent</b> call to your login\n" +
                     "or initialization method.", 8);
 
         DrawLine(Color.gray);
         
-        // VSP Attribution API
-        GUILayout.Label("VSP Attribution API", EditorStyles.boldLabel);
+        // VS Attribution API
+        GUILayout.Label("VS Attribution API", EditorStyles.boldLabel);
         
         actionName = EditorGUILayout.TextField("Action Name", actionName);
-        partnerName = EditorGUILayout.TextField("VSP Partner Name", partnerName);
-        customerUid = EditorGUILayout.TextField("VSP Customer UID", customerUid);
+        partnerName = EditorGUILayout.TextField("VS Partner Name", partnerName);
+        customerUid = EditorGUILayout.TextField("VS Customer UID", customerUid);
 
         GUILayout.Space(20f);
 
-        if(GUILayout.Button("Send Attribution Event"))
+        if (GUILayout.Button("Send Attribution Event"))
         {
-            var result = VspAttribution.SendAttributionEvent(actionName, partnerName, customerUid);
-            Debug.Log($"[VSP Attribution] Attribution Event returned status: {result}!");
+            var result = VSAttribution.SendAttributionEvent(actionName, partnerName, customerUid);
+            Debug.Log($"[VS Attribution] Attribution Event returned status: {result}!");
         }
 
-        DrawHelpBox("Calls VspAttribution.SendAttributionEvent(string actionName, \n" +
+        DrawHelpBox("Calls VSAttribution.SendAttributionEvent(string actionName, \n" +
                     "string partnerName, string customerUid)\n\n" +
                     "Include this call in your Login / Initialization code.", 4);
         

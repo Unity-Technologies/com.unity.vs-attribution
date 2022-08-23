@@ -1,7 +1,9 @@
 {
-    "name": "Unity.VSP-Attribution.Runtime",
+    "name": "Unity.VSAttribution.Editor",
     "references": [],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
