@@ -1,8 +1,7 @@
 ﻿using System;
-using UnityEditor;
 using UnityEngine.Analytics;
 
-namespace UnityEngine.VSAttribution
+namespace UnityEditor.VSAttribution
 {
 	public static class VSAttribution
 	{
