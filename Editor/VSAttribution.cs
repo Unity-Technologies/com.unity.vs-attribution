@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 using UnityEngine.Analytics;
 
 namespace UnityEditor.VSAttribution
@@ -11,7 +12,26 @@ namespace UnityEditor.VSAttribution
 
 		const string k_VendorKey = "unity.vsp-attribution";
 		const string k_EventName = "vspAttribution";
+		
+#if UNITY_2023_2_OR_NEWER
+		[AnalyticInfo(eventName: k_EventName, vendorKey: k_VendorKey, maxEventsPerHour: k_MaxEventsPerHour, maxNumberOfElements: k_MaxNumberOfElements, version: k_VersionId)]
+		private class VSAttributionAnalytic : IAnalytic
+		{
+			private VSAttributionData _data;
+			
+			public VSAttributionAnalytic(VSAttributionData data)
+			{
+				_data = data;
+			}
 
+			public bool TryGatherData(out IAnalytic.IData data, out Exception error)
+			{
+				error = null;
+				data = _data;
+				return data != null;
+			}
+		}
+#else
 		static bool RegisterEvent()
 		{
 			AnalyticsResult result = EditorAnalytics.RegisterEventWithLimit(k_EventName, k_MaxEventsPerHour,
@@ -20,9 +40,13 @@ namespace UnityEditor.VSAttribution
 			var isResultOk = result == AnalyticsResult.Ok;
 			return isResultOk;
 		}
-
+#endif
+		
 		[Serializable]
-		struct VSAttributionData
+		struct VSAttributionData 
+#if  UNITY_2023_2_OR_NEWER
+			: IAnalytic.IData
+#endif
 		{
 			public string actionName;
 			public string partnerName;
@@ -43,10 +67,11 @@ namespace UnityEditor.VSAttribution
 				// Are Editor Analytics enabled ? (Preferences)
 				if (!EditorAnalytics.enabled)
 					return AnalyticsResult.AnalyticsDisabled;
-
+						
+#if !UNITY_2023_2_OR_NEWER
 				if (!RegisterEvent())
 					return AnalyticsResult.InvalidData;
-
+#endif
 				// Create an expected data object
 				var eventData = new VSAttributionData
 				{
@@ -55,8 +80,12 @@ namespace UnityEditor.VSAttribution
 					customerUid = customerUid,
 					extra = "{}"
 				};
-
+#if UNITY_2023_2_OR_NEWER
+				VSAttributionAnalytic analytic = new VSAttributionAnalytic(eventData);
+				return EditorAnalytics.SendAnalytic(analytic);
+#else
 				return EditorAnalytics.SendEventWithLimit(k_EventName, eventData, k_VersionId);
+#endif
 			}
 			catch
 			{
