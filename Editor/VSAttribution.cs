@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.Analytics;
 
 namespace UnityEditor.VSAttribution
