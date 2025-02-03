@@ -3,7 +3,9 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.Analytics;
 
-namespace UnityEditor.VSAttribution
+// Prefix this namespace with a keyword that matches your product's other namespaces
+// Example: [ProductName].VS
+namespace VS
 {
 	public static class VSAttribution
 	{

@@ -1,6 +1,6 @@
 using UnityEditor;
 using UnityEngine;
-using UnityEditor.VSAttribution;
+using VS;
 
 public class StaticScriptSample : EditorWindow
 {
