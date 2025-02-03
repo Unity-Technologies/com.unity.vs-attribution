@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.Analytics;
 
-// Prefix this namespace with a name that matches your other product namespaces
+// Prefix this namespace with a keyword that matches your product's other namespaces
 // Example: [ProductName].VS
 namespace VS
 {
